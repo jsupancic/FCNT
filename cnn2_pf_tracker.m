@@ -1,5 +1,6 @@
-function  position = cnn2_pf_tracker(tracker_param)
-
+function  [position,kbbs] = cnn2_pf_tracker(tracker_param)
+kbbs = [];
+    
 load_tracker_param;
 caffe('presolve_gnet');
 caffe('presolve_snet');
@@ -190,7 +191,8 @@ for im2_id = im1_id:fnum
     end
     
     
-    drawresult(im2_id, mat2gray(im2), [pf_param.p_sz, pf_param.p_sz], affparam2mat(best_geo_param));
+    k_bb = drawresult(im2_id, mat2gray(im2), [pf_param.p_sz, pf_param.p_sz], affparam2mat(best_geo_param));
+    kbbs = vertcat(kbbs,k_bb);
     position(:, im2_id) = best_geo_param;
     mask = mat2gray(imresize(pre_map, [roi_size, roi_size]));
     

@@ -1,4 +1,4 @@
-function drawbox(varargin)
+function k_bb = drawbox(varargin)
 % function drawbox(width,height, param, properties)
 %                 ([width,height], param, properties)
 %
@@ -43,6 +43,7 @@ corners = [ 1,-w/2,-h/2; 1,w/2,-h/2; 1,w/2,h/2; 1,-w/2,h/2; 1,-w/2,-h/2 ]';
 corners = M * corners;
 
 line(corners(1,:), corners(2,:), varargin{:});
+k_bb = [corners(1,1) corners(2,1) corners(1,3) corners(2,3)];
 % patch(corners(1,:), corners(2,:), 'y', ...
 %       'FaceAlpha',0, 'LineWidth',1.5, varargin{:});
 
