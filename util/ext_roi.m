@@ -1,4 +1,4 @@
-function [roi, roi_pos, preim, pad] = ext_roi(im, GT, l_off, roi_size, r_w_scale)
+function roi = ext_roi(im, GT, l_off, roi_size, r_w_scale)
 [h, w, ~] = size(im);
 win_w = GT(3);
 win_h = GT(4);
@@ -27,4 +27,8 @@ end
 roi =  imresize(im(y1:y2, x1:x2, :), [roi_size, roi_size]);
 preim = zeros(size(im,1), size(im,2));
 roi_pos = [x1, y1, x2-x1+1, y2-y1+1];
+
+% package
+roi = struct('roi', roi, 'roi_pos', roi_pos, 'padded_zero_map', ...
+             preim, 'pad', pad);
 end

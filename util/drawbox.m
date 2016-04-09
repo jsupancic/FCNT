@@ -43,7 +43,6 @@ corners = [ 1,-w/2,-h/2; 1,w/2,-h/2; 1,w/2,h/2; 1,-w/2,h/2; 1,-w/2,-h/2 ]';
 corners = M * corners;
 
 line(corners(1,:), corners(2,:), varargin{:});
-k_bb = [corners(1,1) corners(2,1) corners(1,3) corners(2,3)];
 % patch(corners(1,:), corners(2,:), 'y', ...
 %       'FaceAlpha',0, 'LineWidth',1.5, varargin{:});
 
@@ -51,3 +50,7 @@ center = mean(corners(:,1:4),2);
 hold_was_on = ishold; hold on;
 plot(center(1),center(2),varargin{:});
 if (~hold_was_on) hold off; end
+
+% bb in image coordinates
+k_bb = [corners(1,1) corners(2,1) corners(1,3) corners(2,3)];
+

@@ -34,5 +34,6 @@ elseif strcmp(type, 'gaussian')
 else error('unknown map type');
 end
 map = ext_roi(map, location, l_off, roi_size, s);
+map = map.roi;
 map = imresize(map(:,:,1), [fea_sz(1), fea_sz(2)]);
 end
