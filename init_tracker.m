@@ -9,7 +9,7 @@ if ~isdir(seq_path)
 end
 tracker_param.seq_path = seq_path;
 try
-    GT = load([seq_path 'groundtruth_rect.txt']);
+    GT = round(gt_load(seq_name));
 catch
     error('Ground truth files does not exist!');
 end
@@ -20,6 +20,7 @@ dia = (location(3)^2 + location(4)^2)^0.5;
 scale = [dia / location(3), dia / location(4)];
 % tracker_param.l1_off = [0,0];
 % tracker_param.l2_off = [0,0];
+tracker_param.seq_name = seq_name;
 tracker_param.s1 = pf_param.roi_scale*[scale(1),scale(2)];
 tracker_param.s2 = pf_param.roi_scale*[scale(1),scale(2)];
 tracker_param.roi_size = 368;
