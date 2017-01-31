@@ -1,4 +1,4 @@
-function tracker_param = init_tracker(data_path, seq_name)
+function tracker_param = init_tracker(data_path, seq_name, start_frame)
 %% particle filter parameters
 pf_param = struct('affsig', [10,10,.004,.00,0.00,0], 'p_sz', 64,...
             'p_num', 600, 'mv_thr', 0.1, 'up_thr', 0.35, 'roi_scale', 2);
@@ -14,7 +14,7 @@ catch
     error('Ground truth files does not exist!');
 end
 %% parameters to crop ROI
-location = GT(1, :);
+location = GT(start_frame, :);
 tracker_param.location = location;
 dia = (location(3)^2 + location(4)^2)^0.5;
 scale = [dia / location(3), dia / location(4)];
